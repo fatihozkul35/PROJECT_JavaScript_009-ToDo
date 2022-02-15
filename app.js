@@ -18,6 +18,7 @@ function loadPage() {
 
 //*********Todo adding into the TO DO list */
 eventListener();
+
 function eventListener() {
   add.addEventListener("click", function () {
     if (!input.value) {
@@ -31,16 +32,43 @@ function eventListener() {
 
 //*********Todo to inProgress */
 
-setTimeout(todoToinprogress(), 5000);
+todoToinprogress();
 
 function todoToinprogress() {
   for (let i of todos) {
+    console.log(i);
     i.addEventListener("click", function () {
-      setLocalStorage(i.textContent, "inprogress");
       inProgressList.appendChild(i);
       i.className = "inprogress";
+      console.log(i.className);
+      i.innerHTML = `<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+      <label class="form-check-label" for="flexCheckDefault">${i.textContent}
+      </label>`;
+      // setLocalStorage(i.textContent, "inprogress");
     });
   }
+}
+
+// function createNewCheckbox() {
+//   const checkboxInput = document.createElement("input");
+//   checkboxInput.className = "form-check-input";
+//   checkboxInput.style.type = "checkbox";
+//   checkboxInput.value = "";
+//   checkboxInput.id = "flexCheckDefault";
+// }
+
+{
+  /* <a href="#">
+  <input
+    class="form-check-input"
+    type="checkbox"
+    value=""
+    id="flexCheckDefault"
+  />
+  <label class="form-check-label" for="flexCheckDefault">
+    Default checkbox
+  </label>
+</a>; */
 }
 
 //***************functions */
@@ -69,6 +97,7 @@ function createNewTodo(where, name) {
   setLocalStorage(newTodo.textContent, name);
   todos = document.querySelectorAll(".todo");
   input.value = "";
+  todoToinprogress();
 }
 
 function setLocalStorage(k, v) {
@@ -88,5 +117,5 @@ function allStorage() {
     }
   });
 }
-console.log(todosInprogress);
+
 //**************test section */
